@@ -57,26 +57,19 @@ $statusMap = array(
 
         <!-- THIS IS THE COMMENT SECTION OF THE VIEW -->
         <?php $comments = Comment::where('ticketID', $ticket->id)->get() ?>
-        @foreach ($comments as $comment)
+        @if (sizeof($comments) == 0)
             <tr>
-                <td class="col-lg-3">{{$comment->userEmail}}</td>
-                <td class="col-lg-6">{{$comment->content}}</td>
-                <td class="col-lg-3">{{$comment->created_at}}</td>
+                <td colspan="3">There are no comments yet</td>
             </tr>
-        @endforeach
+            @else
+            @foreach ($comments as $comment)
+                <tr>
+                    <td class="col-lg-3">{{$comment->userEmail}}</td>
+                    <td class="col-lg-6">{{$comment->content}}</td>
+                    <td class="col-lg-3">{{$comment->created_at}}</td>
+                </tr>
 
-        <!-- THIS IS WHERE THE COMMENT FORM BEGINS -->
-        {!! Form::model(Comment::class, ['action' => 'CommentController@store']) !!}
-        {!! Form::hidden('userEmail', 'admin@rmit.edu.au', [ 'class' => 'form-control', 'hidden']) !!}
-        {!! Form::hidden('ticketID', $ticket->id, ['class' => 'form-control', 'hidden']) !!}
-        <tr>
-            <td colspan="2" class="col-lg-8">
-                {!! Form::text('content', null, ['class' => 'form-control', 'placeholder' => 'Write Comment Here']) !!}
-            </td>
-            <td class="col-lg-4">
-                <button class="btn btn-success" type="submit">Post</button>
-                {!! Form::close() !!}
-            </td>
-        </tr>
+            @endforeach
+            @endif
     </table>
 @endsection

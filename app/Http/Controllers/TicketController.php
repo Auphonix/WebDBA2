@@ -52,23 +52,13 @@ class TicketController extends Controller
     public function store(QueryRequest $request)
     {
         $allRequests = $request->all();
-        $adminFormat = '@admin.rmit.edu.au';
-
-        // Determine whether user is admin based off of email type
-        if (strpos($allRequests['email'], $adminFormat) !== false) $allRequests['isAdmin'] = true;
-        else $allRequests['isAdmin'] = false;
-
-        // Determine whether user exists
-        $allUsers = User::all();
-        $exists = false;
-        foreach ($allUsers as $tmpUser) if ($allRequests['email'] == $tmpUser['email']) $exists = true;
 
         // Save to DB
-        if (!$exists) $this->saveUser($allRequests);
         $this->saveTicket($allRequests);
 
         // Finish store
-        return redirect()->route('ticket.create')->with('success', 'Query added successfully');
+//        FIXME DIRECT STRAIGHT TO TICKET e.g. ticket/show/{ticketid}
+        return redirect()->route('ticket.index')->with('success', 'Query added successfully');
     }
 
     /**

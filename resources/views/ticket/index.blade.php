@@ -13,7 +13,7 @@ $statusMap = array(
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>All Tickets</h2>
+                <h2>My Tickets</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('ticket.create') }}"> Create New Ticket</a>
@@ -34,6 +34,7 @@ $statusMap = array(
             <th width="280px">Action</th>
         </tr>
         @foreach ($tickets as $ticket)
+            @if (Auth::user()->email == $ticket->userEmail)
             <tr>
                 <td>{{ $ticket->id }}</td>
                 <td>{{ $ticket->userEmail }}</td>
@@ -41,9 +42,9 @@ $statusMap = array(
                 <td><strong class="label label-{{{ $statusMap[$ticket->status] }}}">{{ $ticket->status }}</strong></td>
                 <td>
                     <a class="btn btn-info" href="{{ route('ticket.show', $ticket->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
                 </td>
             </tr>
+            @endif
         @endforeach
     </table>
     {!! $tickets->render() !!}

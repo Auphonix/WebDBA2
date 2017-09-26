@@ -19,8 +19,8 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                @if(!Auth::guest())
-                <li><a href="{{ route('ticket.create') }} ">Submit Ticket</a></li>
+                @if(!Auth::guest()) <!-- GUEST CANNOT VIEW -->
+                    <li><a href="{{ route('ticket.index') }} ">My Tickets</a></li>
                 @endif
                 <li><a href="{{ route('faq') }}">FAQ</a></li>
             </ul>
