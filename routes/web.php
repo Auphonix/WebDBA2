@@ -21,3 +21,10 @@ Route::get('/faq', function () {
 
 Route::resource('ticket', 'TicketController', ['except' => ['destroy']]);
 Route::resource('comment', 'CommentController', ['only' => ['store']]);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
