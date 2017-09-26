@@ -1,0 +1,25 @@
+.hero-image {
+  img {
+    max-width: 100%;
+  }
+}
+
+.introduction {
+  margin-top: 5em;
+}
+
+.recent-tickets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20em;
+  margin-top: 5em;
+}
+
+p {
+
+}
+
+.recent-tickets-empty {
+  background-color: transparentize($brand-warning, 0.7);
+}

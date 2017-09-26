@@ -1,0 +1,50 @@
+// Sticky footer code from: https://css-tricks.com/couple-takes-sticky-footer/#article-header-id-3
+
+html, body {
+  // Used to facilitate the sticky footer
+  height: 100%;
+}
+
+body {
+  // Used to facilitate the sticky footer
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-default {
+  background-color: $google-red;
+  border: none;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  color: white;
+
+  &:focus, &:hover {
+    color: white;
+  }
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  border-color: white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: white;
+}
+
+.content {
+  // Used to facilitate the sticky footer
+  flex: 1 0 auto;
+}
+
+footer {
+  height: 60px;
+
+  .container {
+    text-align: center;
+  }
+}
