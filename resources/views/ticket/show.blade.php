@@ -7,7 +7,7 @@ $statusMap = array(
 );
 ?>
 
-@extends('master')
+@extends('layouts.app')
 @section('pageTitle', 'Show Tickets')
 @section('content')
     <?php use App\Comment; ?>

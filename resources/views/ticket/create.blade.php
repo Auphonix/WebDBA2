@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 @section('title', 'Submit a ticket')
 @section('content')
     <div class="row">

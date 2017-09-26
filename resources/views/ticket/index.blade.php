@@ -7,7 +7,7 @@ $statusMap = array(
 );
 ?>
 
-@extends('master')
+@extends('layouts.app')
 @section('content')
     <head><title>Index</title></head>
     <div class="row">

@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 @section('title', 'Home')
 @section('content')
     <h1>RMIT Service & Support</h1>

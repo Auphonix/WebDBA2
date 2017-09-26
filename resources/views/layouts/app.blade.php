@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'RMIT Service & Support') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -16,7 +16,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -28,15 +28,16 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        RMIT Service & Support
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li><a href="{{ route('ticket.create') }} ">Submit Ticket</a></li>
+                        <li><a href="{{ route('faq') }}">FAQ</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -71,7 +72,13 @@
             </div>
         </nav>
 
-        @yield('content')
+        <!-- Content -->
+        <div class="container content">
+            @yield('content')
+        </div>
+
+        <!-- Footer -->
+        @include('shared.footer')
     </div>
 
     <!-- Scripts -->
