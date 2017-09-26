@@ -12,6 +12,13 @@ use App\Http\Requests\QueryRequest;
 
 class TicketController extends Controller
 {
+
+//    Prevents user from accessing tickets if not logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +28,8 @@ class TicketController extends Controller
     {
         // Get all the tickets by ID in descending order and limit to 5 per page
         // Paginate automatically adds index at bottom of page to switch through pages
-        $tickets= Ticket::orderBy('id','DESC')->paginate(5);
-        return view('ticket.index',compact('tickets')) ->with('i', ($request->input('page', 1) - 1) * 5);
+        $tickets = Ticket::orderBy('id', 'DESC')->paginate(5);
+        return view('ticket.index', compact('tickets'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -39,7 +46,7 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(QueryRequest $request)
@@ -67,58 +74,58 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $ticket = Ticket::with('User')->find($id);
-        return view('ticket.show',compact('ticket'));
+        return view('ticket.show', compact('ticket'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $ticket= Ticket::find($id);
-        return view('ticket.edit',compact('ticket'));
+        $ticket = Ticket::find($id);
+        return view('ticket.edit', compact('ticket'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $request, $id)
     {
         $allrequests = $request->all();
-        $userDetails = array('firstName' => $allrequests['firstName'], 'lastName' =>$allrequests['lastName'],
+        $userDetails = array('firstName' => $allrequests['firstName'], 'lastName' => $allrequests['lastName'],
             'email' => $allrequests['email']);
         $ticketDetails = array('status' => $allrequests['status'], 'userEmail' => $allrequests['email'], 'operatingSystem' => $allrequests['operatingSystem'],
             'issue' => $allrequests['issue'], 'description' => $allrequests['description']);
 
         Ticket::find($id)->update($ticketDetails);
         User::find(Ticket::find($id)->userEmail)->update($userDetails);
-        return redirect()->route('ticket.index') ->with('success','Ticket updated successfully');
+        return redirect()->route('ticket.index')->with('success', 'Ticket updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         // Removes all associated comments
         $comments = Comment::where('ticketID', $id)->get();
-        foreach($comments as $comment){
+        foreach ($comments as $comment) {
             $comment->delete();
         }
 
@@ -126,7 +133,7 @@ class TicketController extends Controller
         Ticket::find($id)->delete();
 
         // Returns to the index page with success
-        return redirect()->route('ticket.index') ->with('success','Ticket deleted successfully');
+        return redirect()->route('ticket.index')->with('success', 'Ticket deleted successfully');
     }
 
     /*---------HELPER METHODS-------------*/
