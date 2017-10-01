@@ -11,4 +11,11 @@ class Comment extends Model
     public function ticket(){
         return $this->belongsTo('App\Ticket', 'id');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+
+
 }

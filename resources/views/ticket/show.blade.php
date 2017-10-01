@@ -10,7 +10,7 @@ $statusMap = array(
 @extends('layouts.app')
 @section('pageTitle', 'Show Tickets')
 @section('content')
-    <?php use App\Comment; ?>
+    <?php use App\Comment; use App\User; ?>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -62,8 +62,9 @@ $statusMap = array(
             </tr>
             @else
             @foreach ($comments as $comment)
+                <?php $comment_user = User::find($comment->userID) ?>
                 <tr>
-                    <td class="col-lg-3">{{$comment->userEmail}}</td>
+                    <td class="col-lg-3">{{$comment_user->email}}</td>
                     <td class="col-lg-6">{{$comment->content}}</td>
                     <td class="col-lg-3">{{$comment->created_at}}</td>
                 </tr>
