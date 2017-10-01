@@ -8,9 +8,9 @@ if (Auth::guest()) {
 if (isset($ticket)) {
     $user = App\User::find($ticket->userEmail);
     $params = array($user->firstName, $user->lastName, $user->email, $ticket->operatingSystem,
-        $ticket->issue, $ticket->description, 'Update');
+        $ticket->issue, $ticket->description, $user->id, 'Update', );
 } else {
-    $params = array( Auth::user()->firstName,  Auth::user()->lastName, Auth::user()->email, null, null, null, 'Submit Ticket');
+    $params = array( Auth::user()->firstName,  Auth::user()->lastName, Auth::user()->email, null, null, null, Auth::user()->id, 'Submit Ticket');
 }
 ?>
 
@@ -45,4 +45,6 @@ if (isset($ticket)) {
     ,'maxlength' =>2000, 'rows' => 4, 'style' => 'resize:none']) !!}
 </div>
 
-<button class="btn btn-success" type="submit">{{$params[6]}}</button>
+{!! Form::hidden('userID', $params[6], ['id' => 'userID']) !!}
+
+<button class="btn btn-success" type="submit">{{$params[7]}}</button>

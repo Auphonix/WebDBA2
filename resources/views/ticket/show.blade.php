@@ -11,7 +11,6 @@ $statusMap = array(
 @section('pageTitle', 'Show Tickets')
 @section('content')
     <?php use App\Comment; ?>
-    <?php $user = $ticket->User; ?> <!-- refer to instance of user -->
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">

@@ -34,10 +34,10 @@ $statusMap = array(
             <th width="280px">Action</th>
         </tr>
         @foreach ($tickets as $ticket)
-            @if (Auth::user()->email == $ticket->userEmail)
+            @if (Auth::user()->id == $ticket->userID)
             <tr>
                 <td>{{ $ticket->id }}</td>
-                <td>{{ $ticket->userEmail }}</td>
+                <td>{{ Auth::user()->email }}</td>
                 <td>{{ $ticket->issue }}</td>
                 <td><strong class="label label-{{{ $statusMap[$ticket->status] }}}">{{ $ticket->status }}</strong></td>
                 <td>

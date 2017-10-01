@@ -70,7 +70,8 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::with('User')->find($id);
-        return view('ticket.show', compact('ticket'));
+        $user = User::find($ticket->userID);
+        return view('ticket.show', compact(['ticket', 'user']));
     }
 
     /**
@@ -143,7 +144,7 @@ class TicketController extends Controller
     private function saveTicket($allRequests)
     {
         $ticket = new Ticket();
-        $ticket->useremail = $allRequests['email'];
+        $ticket->userID = $allRequests['userID'];
         $ticket->operatingSystem = $allRequests['operatingSystem'];
         $ticket->status = "Pending";
         $ticket->issue = $allRequests['issue'];
