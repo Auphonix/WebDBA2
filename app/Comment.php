@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['userEmail','content'];
+    protected $fillable = ['content'];
 
     public function ticket(){
-        return $this->belongsTo('App\Ticket', 'id');
+        return $this->belongsTo('App\Ticket', 'ticketID');
     }
 
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function techUser(){
+        return $this->belongsTo('App\TechUser', 'techUserID');
     }
-
-
-
 }
