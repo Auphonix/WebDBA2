@@ -23,8 +23,8 @@ class UpdateCommentsTicketsForTechUsers extends Migration
         });
 
         Schema::table('tickets', function (Blueprint $table) {
-            $table->integer('priority');
-            $table->string('escalationLevel');
+            $table->string('priority');
+            $table->integer('escalationLevel');
         });
     }
 
